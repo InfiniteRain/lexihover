@@ -33,10 +33,9 @@ type VerboseDictionaryEntry = {
   definitions: VerboseDefinition[];
 };
 
-const dictResponse = await fetch(
+const dictPromise: Promise<CompressedDictionary> = fetch(
   chrome.runtime.getURL("dutch-dictionary.json")
-);
-const dict: CompressedDictionary = await dictResponse.json();
+).then((response) => response.json());
 const delim = /[\s|\/\\(){}\[\]<>@#$%^&*+\-~:;"?!,.]/;
 
 let mouseX = 0;
@@ -235,9 +234,10 @@ const getWordRange = (text: string, index: number) => {
   return [left, right];
 };
 
-const lookup = (
+const lookup = async (
   word: string
-): [string, VerboseDictionaryEntry[]] | [null, null] => {
+): Promise<[string, VerboseDictionaryEntry[]] | [null, null]> => {
+  const dict = await dictPromise;
   let entries: (typeof dict)[string];
 
   do {
@@ -298,7 +298,7 @@ const selectRange = (node: Node, start: number, end: number) => {
   selection.addRange(range);
 };
 
-const attemptQuery = () => {
+const attemptQuery = async () => {
   const hoveredBox = getHoveredBox();
 
   if (hoveredBox !== shiftPressedOn) {
@@ -335,7 +335,7 @@ const attemptQuery = () => {
     return;
   }
 
-  const [finalWord, entries] = lookup(hoveredWord);
+  const [finalWord, entries] = await lookup(hoveredWord);
 
   if (!entries || entries.length === 0) {
     return;

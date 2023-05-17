@@ -3,15 +3,15 @@
   "name": "LexiHover",
   "version": "0.1.0",
   "icons": {
-    "16": "public/icon16.png",
-    "32": "public/icon32.png",
-    "48": "public/icon48.png",
-    "128": "public/icon128.png"
+    "16": "assets/icon16.png",
+    "32": "assets/icon32.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
   },
   "description": "A hover over dictionary for Dutch! Press shift while hovering over a Dutch word to show the definition.",
   "content_scripts": [
     {
-      "js": ["src/content.ts"],
+      "js": ["src/content.tsx"],
       "matches": ["<all_urls>"]
     }
   ]

@@ -23,12 +23,11 @@
   position: absolute;
   font-family: "Poppins", sans-serif;
   color: #000;
-  width: 350px;
-  height: 125px;
   background: #fbf4a0;
   z-index: 999999999;
 
-  border: 2px solid #000;
+  border-style: solid;
+  border-color: #000;
   border-radius: 10px;
   overflow: overlay;
   box-shadow: 0.5vmin 0.5vmin #000;

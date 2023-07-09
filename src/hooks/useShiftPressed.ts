@@ -22,13 +22,13 @@ const useShiftPressed = (): Accessor<boolean> => {
   onMount(() => {
     document.addEventListener("keydown", onKeyDown);
     document.addEventListener("keyup", onKeyUp);
-    document.addEventListener("blur", onBlur);
+    window.addEventListener("blur", onBlur);
   });
 
   onCleanup(() => {
     document.addEventListener("keydown", onKeyDown);
     document.addEventListener("keyup", onKeyUp);
-    document.addEventListener("blur", onBlur);
+    window.addEventListener("blur", onBlur);
   });
 
   return isShiftPressed;
